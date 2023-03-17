@@ -12,6 +12,8 @@ let snakeY = block_size * 5 ;
 let move_directionX = 0 ;
 let move_directionY = 0 ;
 
+const snake_body = [];
+
 // food;
 let foodX;
 let foodY;
@@ -38,12 +40,20 @@ const update = () => {
     boardCanvas.fillStyle = "red";
     boardCanvas.fillRect(foodX, foodY, block_size, block_size);
 
+    if(snakeX == foodX & snakeY == foodY){
+        snake_body.push([foodX, foodY]);
+        foodPosition();
+    }
+
     boardCanvas.fillStyle = "lime";
     snakeX += move_directionX * block_size ;
     snakeY += move_directionY * block_size ;
     boardCanvas.fillRect(snakeX , snakeY , block_size, block_size);
 
-    
+    for(let i = 0; i < snake_body.length; i++){
+        boardCanvas.fillRect(snake_body[i][0], snake_body[i][1], block_size, block_size);
+    }
+
 }
 
 const foodPosition = () => {
@@ -52,19 +62,20 @@ const foodPosition = () => {
 }
 
 const changeDirection = (e) => {
-    console.log(e.keyCode);
-    if(e.keyCode == "38"){
+    if(e.keyCode == "38" && move_directionY != 1){
         move_directionX = 0 ;
         move_directionY = -1 ;
-    }else if(e.keyCode == "39"){
+    }else if(e.keyCode == "39" && move_directionX != -1){
         move_directionX = 1 ;
         move_directionY = 0 ;
-    }else if(e.keyCode == "40"){
+    }else if(e.keyCode == "40" && move_directionY != -1){
         move_directionX = 0 ;
         move_directionY = 1 ;
-    }else if(e.keyCode == "37"){
+    }else if(e.keyCode == "37" && move_directionX != 1){
         move_directionX = -1 ;
         move_directionY = 0 ;
     }
+    console.log(snake_body);
+
 
 }
