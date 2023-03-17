@@ -18,12 +18,14 @@ const snake_body = [];
 let foodX;
 let foodY;
 
+// game over;
+let game_over = false ;
+
 window.onload = () => {
     board = document.getElementById("game-board");
     board.height = rows * block_size ;
     board.width = cols * block_size ;
     boardCanvas = board.getContext("2d");
-    console.log(board , boardCanvas);
 
     document.onkeyup = changeDirection ;
 
@@ -34,6 +36,10 @@ window.onload = () => {
 }
 
 const update = () => {
+    if(game_over){
+        return false;
+    }
+
     boardCanvas.fillStyle = "black";
     boardCanvas.fillRect(0, 0, board.width, board.height);
 
@@ -62,6 +68,18 @@ const update = () => {
         boardCanvas.fillRect(snake_body[i][0], snake_body[i][1], block_size, block_size);
     }
 
+    // game over condition;
+    if(snakeX < 0 || snakeX > rows * block_size || snakeY < 0 || snakeY > cols * block_size){
+        game_over = true ;
+        alert("Game Over");
+    }
+    for(let i = 0; i < snake_body.length; i ++){
+        if(snakeX == snake_body[i][0] && snakeY == snake_body[i][1]){
+            game_over = true ;
+            alert("Game Over");
+        }
+    }
+
 }
 
 const foodPosition = () => {
@@ -83,7 +101,4 @@ const changeDirection = (e) => {
         move_directionX = -1 ;
         move_directionY = 0 ;
     }
-    console.log(snake_body);
-
-
 }
