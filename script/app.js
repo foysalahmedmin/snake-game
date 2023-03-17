@@ -19,7 +19,15 @@ window.onload = () => {
     boardCanvas = board.getContext("2d");
     console.log(board , boardCanvas);
 
+    
+    update();
+
+}
+
+const update = () => {
     boardCanvas.fillStyle = "black"
     boardCanvas.fillRect(0, 0, board.width, board.height);
 
+    boardCanvas.fillStyle = "lime";
+    boardCanvas.fillRect(snakeX , snakeY , block_size, block_size);
 }
