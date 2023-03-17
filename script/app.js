@@ -45,6 +45,14 @@ const update = () => {
         foodPosition();
     }
 
+    for(let i = snake_body.length - 1 ; i > 0; i --){
+        snake_body[i] = snake_body[i-1];
+    }
+
+    if(snake_body.length){
+        snake_body[0] = [snakeX, snakeY]
+    }
+
     boardCanvas.fillStyle = "lime";
     snakeX += move_directionX * block_size ;
     snakeY += move_directionY * block_size ;
