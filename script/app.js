@@ -23,8 +23,11 @@ window.onload = () => {
     boardCanvas = board.getContext("2d");
     console.log(board , boardCanvas);
 
-    
-    update();
+    document.onkeyup = changeDirection ;
+
+    foodPosition();
+    // update();
+    let updating = setInterval(() => {update()}, 100)
 
 }
 
@@ -32,7 +35,6 @@ const update = () => {
     boardCanvas.fillStyle = "black";
     boardCanvas.fillRect(0, 0, board.width, board.height);
 
-    foodPosition();
     boardCanvas.fillStyle = "red";
     boardCanvas.fillRect(foodX, foodY, block_size, block_size);
 
@@ -45,7 +47,24 @@ const update = () => {
 }
 
 const foodPosition = () => {
-    console.log(board.height, board.width);
-    foodX = board.height/ 2 ;
-    foodY = board.width /2 ;
+    foodX = Math.floor(Math.random() * cols) * block_size ;
+    foodY = Math.floor(Math.random() * rows) * block_size ;
+}
+
+const changeDirection = (e) => {
+    console.log(e.keyCode);
+    if(e.keyCode == "38"){
+        move_directionX = 0 ;
+        move_directionY = -1 ;
+    }else if(e.keyCode == "39"){
+        move_directionX = 1 ;
+        move_directionY = 0 ;
+    }else if(e.keyCode == "40"){
+        move_directionX = 0 ;
+        move_directionY = 1 ;
+    }else if(e.keyCode == "37"){
+        move_directionX = -1 ;
+        move_directionY = 0 ;
+    }
+
 }
