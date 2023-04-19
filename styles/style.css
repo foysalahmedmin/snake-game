@@ -1,0 +1,52 @@
+section.game-field {
+    min-height: 95vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
+}
+
+.controller .container .controllers {
+    text-align: center;
+    margin-top: 1.5rem;
+    display: none;
+}
+
+#blockSize {
+    font-size: 30px;
+}
+
+@media (max-width: 768px) {
+    section.game-field {
+        min-height: auto;
+    }
+
+    #blockSize {
+        font-size: 21px;
+    }
+
+    .controller .container .controllers {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .controller .container .controllers button{
+        height: 45px;
+    }
+    #up{
+        grid-column: 1 /span 2;
+    }
+    #down{
+        grid-column: 1 /span 2;
+    }
+}
+
+@media (max-width: 576px) {
+    #blockSize {
+        font-size: 18px;
+    }
+}
